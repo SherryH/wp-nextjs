@@ -1,14 +1,14 @@
-const API_URL = 'http://wccourse.local/graphql'
+const API_URL = "http://wccourse.local/graphql";
 
 const fetchAPI = async (query) => {
-  const headers = { 'Content-Type': 'application/json' }
+  const headers = { "Content-Type": "application/json" };
   const results = await fetch(API_URL, {
-    method: 'POST',
+    method: "POST",
     headers,
-    body: JSON.stringify({ query })
-  }).then((response) => response.json())
-  return results.data
-}
+    body: JSON.stringify({ query }),
+  }).then((response) => response.json());
+  return results.data;
+};
 
 export const fetchAllPosts = async () => {
   const query = `
@@ -28,8 +28,58 @@ export const fetchAllPosts = async () => {
       }
     }
   }
-  `
-  return fetchAPI(query)
-}
+  `;
+  return fetchAPI(query);
+};
 
-export default fetchAPI
+export const fetchProductsAndCategories = async () => {
+  const query = `
+  query fetchProductsAndCategories {
+    __typename
+    productCategories {
+     nodes {
+       name
+       id
+       image {
+         sourceUrl
+         slug
+         srcSet
+       }
+       slug
+     }
+   }
+   products {
+    nodes {
+      name
+      description
+      averageRating
+      id
+      ... on SimpleProduct {
+        id
+        name
+        price
+        regularPrice
+        slug
+      }
+      ... on VariableProduct {
+        id
+        name
+        price
+        regularPrice
+        slug
+      }
+      image {
+        sourceUrl
+        srcSet
+        id
+        uri
+      }
+    }
+  }
+  }
+
+  `;
+  return fetchAPI(query);
+};
+
+export default fetchAPI;
