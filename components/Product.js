@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Image from "../components/Image";
+import AddToCartButton from "../components/AddToCartButton";
 
 const Product = ({ product }) => {
   return (
     <div className="flex-1 min-w-28 m-8">
-      <Link href={`/product/${product.slug}`}>
+      <Link href={`/product/[slug].js`} as={`/product/${product.slug}`}>
         <div className="relative bg-gray-100 h-48 w-auto md:h-72 cursor-pointer">
           <Image
             className="object-cover"
@@ -19,6 +20,10 @@ const Product = ({ product }) => {
         dangerouslySetInnerHTML={{ __html: product?.description }}
       ></div>
       <div className="text-2xl font-semibold pt-2">{product.price}</div>
+      <AddToCartButton
+        showButton={Boolean(product.price)}
+        productId={product.databaseId}
+      />
     </div>
   );
 };

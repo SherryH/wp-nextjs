@@ -9,16 +9,19 @@ export default function Home({ productCategories, products }) {
     <>
       <Navigation />
       <h1>Index</h1>
-      <div classNameName={styles.main}>
+      <div className={styles.main}>
         Check if style applied
-        <div classNameName={styles.title}>
+        <div className={styles.title}>
           <a href="/">This is a blue link</a>
         </div>
       </div>
       <Heading>Categories</Heading>
       <div className="container mx-8 my-4 flex flex-wrap justify-center text-white">
         {productCategories.map((category) => (
-          <div className="flex-1 bg-blue-500 mr-4 p-2 text-center border-0 rounded">
+          <div
+            key={category.id}
+            className="flex-1 bg-blue-500 mr-4 p-2 text-center border-0 rounded"
+          >
             {category.name}
           </div>
         ))}
@@ -26,9 +29,10 @@ export default function Home({ productCategories, products }) {
 
       <Heading>Products</Heading>
       <div className="flex flex-wrap">
-        {products.map((product) => (
-          <Product product={product} />
-        ))}
+        {products.map((product) => {
+          console.log("productId", product.id);
+          return <Product key={product.id} product={product} />;
+        })}
       </div>
     </>
   );
