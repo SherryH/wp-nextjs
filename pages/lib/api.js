@@ -1,13 +1,21 @@
+import { identifySession, setHeaderSession } from "./session";
 const API_URL = "http://wccourse.local/graphql";
 
 const fetchAPI = async (query, { variables } = {}) => {
   console.log("variables", variables);
-  const headers = { "Content-Type": "application/json" };
+  let headers = { "Content-Type": "application/json" };
+
+  // attach session to header so cart number can be fetched correctly from server
+  setHeaderSession(headers);
+
   const results = await fetch(API_URL, {
     method: "POST",
     headers,
     body: JSON.stringify({ query, variables }),
-  }).then((response) => response.json());
+  }).then((response) => {
+    identifySession(response);
+    return response.json();
+  });
   console.log("results", results);
   return results.data;
 };
@@ -166,6 +174,7 @@ export const getCart = () => {
             }
           }
         }
+        productCount
       }
       total
       subtotal
@@ -185,6 +194,9 @@ export const addToCart = (input) => {
     addToCart(input: $input) {
       cart {
         total
+        contents {
+          productCount
+        }
       }
       cartItem {
         product {
