@@ -6,6 +6,9 @@ module.exports = {
       minWidth: {
         28: "28rem",
       },
+      maxWidth: {
+        8: "8rem",
+      },
     },
   },
   variants: {

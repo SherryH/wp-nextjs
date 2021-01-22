@@ -6,7 +6,6 @@ import { fetchAllPosts } from "../pages/lib/api.js";
 const Posts = ({ posts }) => {
   return (
     <div class="px-8 container mx-auto">
-      <Navigation />
       <h1>This is a posts page</h1>
       <div
         id="post-cards-container"

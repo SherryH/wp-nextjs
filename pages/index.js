@@ -8,11 +8,10 @@ export default function Home({ productCategories, products }) {
   return (
     <>
       <Navigation />
-      <h1>Index</h1>
       <div className={styles.main}>
         Check if style applied
         <div className={styles.title}>
-          <a href="/">This is a blue link</a>
+          <a href="/">Hero Images Here</a>
         </div>
       </div>
       <Heading>Categories</Heading>
