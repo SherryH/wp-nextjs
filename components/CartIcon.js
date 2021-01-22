@@ -1,6 +1,10 @@
+import Link from "next/link";
+import { useCartContext } from "../context/CartContext";
 const CartIcon = () => {
+  const { cart } = useCartContext();
+  const itemCount = cart?.cart?.contents?.itemCount;
   return (
-    <Link href="/">
+    <Link href="/cart">
       <a className="block mt-4 inline-block mt-0 text-gray hover:text-black mr-10 flex flex-col items-center">
         <svg
           version="1.1"
@@ -29,10 +33,11 @@ const CartIcon = () => {
             />
           </g>
         </svg>
-        Cart
-        {/* {productsCount ? <span className="ml-1">({productsCount})</span> : ""} */}
+        {itemCount ? <span className="ml-1">({itemCount})</span> : ""}
         {/*{ totalPrice ? <span>{ totalPrice }</span> : '' }*/}
       </a>
     </Link>
   );
 };
+
+export default CartIcon;

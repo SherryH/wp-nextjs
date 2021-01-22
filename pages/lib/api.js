@@ -147,6 +147,8 @@ export const getAllProductsSlugs = () => {
 export default fetchAPI;
 
 export const getCart = () => {
+  // productCount is the number of different types of products selected
+  // itemCount is the total number of items selected
   const query = `
   query getCart {
     __typename
@@ -154,6 +156,7 @@ export const getCart = () => {
       contents {
         edges {
           node {
+            quantity
             product {
               node {
                 id
@@ -175,6 +178,7 @@ export const getCart = () => {
           }
         }
         productCount
+        itemCount
       }
       total
       subtotal

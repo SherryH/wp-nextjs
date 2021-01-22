@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CartIcon from "./CartIcon";
 
 const Navigation = () => (
   <nav className="p-8 border-b-2 sticky top-0 bg-white z-10 flex">
@@ -24,6 +25,7 @@ const Navigation = () => (
         </Link>
       </div>
     </div>
+    <CartIcon />
   </nav>
 );
 
